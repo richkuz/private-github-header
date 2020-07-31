@@ -1,0 +1,21 @@
+{
+  "name": "Private GitHub Header",
+  "description": "Make the GitHub private repos obviously private by adding a red header bar.",
+  "version": "1.0",
+  "permissions": [
+    "activeTab",
+    "https://ajax.googleapis.com/"
+  ],
+  "content_scripts": [
+        {
+          "matches": [
+            "https://github.com/*"
+          ],
+          "js": ["content.js"],
+          "run_at": "document_end"
+        }
+  ],
+  "browser_action": {
+  },
+  "manifest_version": 2
+}
