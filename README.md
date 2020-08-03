@@ -8,7 +8,7 @@ Inspired by, and largely copied from, the [Firefox private-github-header extensi
 
 1. Clone this repo
 
-2. In Chrome, visit chrome://extensions/
+2. In Chrome, visit [chrome://extensions/](chrome://extensions/)
 
 3. Toggle on "Developer mode" in the upper right
 
