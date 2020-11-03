@@ -14,9 +14,11 @@ window.onload=function(){
 
   // Copy a formatted link to the GitHub issue
   function addCopyButton() {
+    if (document.getElementById('extensionCopyButton')) return;
     var element = document.createElement("input");
     element.type = 'button';
-    element.value = 'Copy';
+    element.value = 'Copy Formatted';
+    element.id = 'extensionCopyButton'
     element.style.marginRight="20px";
     element.onclick = function() {
       var title = document.getElementsByClassName('js-issue-title')[0].innerText;
@@ -39,7 +41,34 @@ window.onload=function(){
       selection.addRange(range);
       const successful = document.execCommand('copy');
       document.body.removeChild(div);
+    };
+    document.getElementsByClassName('Header')[0].prepend(element);
+  }
 
+  // Add a button to copy link title and URL in MD format
+  function addCopyMarkdownButton() {
+    if (document.getElementById('extensionCopyButtonMarkdown')) return;
+    var element = document.createElement("input");
+    element.type = 'button';
+    element.value = 'Copy Markdown';
+    element.id = 'extensionCopyButtonMarkdown'
+    element.style.marginRight="20px";
+    element.onclick = function() {
+      var title = document.getElementsByClassName('js-issue-title')[0].innerText;
+      var href = window.location.href;
+      var id = href.substr(href.lastIndexOf('/') + 1);
+
+      var div = document.createElement('div');
+      div.appendChild(document.createTextNode(title + ' [#' + id + '](' + href + ')'));
+      document.body.appendChild(div);
+
+      const range = document.createRange();
+      range.selectNode(div);
+      const selection = window.getSelection();
+      selection.removeAllRanges();
+      selection.addRange(range);
+      const successful = document.execCommand('copy');
+      document.body.removeChild(div);
     };
     document.getElementsByClassName('Header')[0].prepend(element);
   }
@@ -70,4 +99,5 @@ window.onload=function(){
   }
 
   addCopyButton();
+  addCopyMarkdownButton();
 }
